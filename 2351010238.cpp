@@ -1,157 +1,119 @@
-﻿#include <iostream>
+#include <iostream>
+#include <iomanip>
 using namespace std;
-const int max = 20;
 
-int main() {
-	int arr[max];
-	int choice;
-	bool init = false;
-	int n;
-	do {
+int main(){
+	char chon;
+	int a,b,c,max,min;
+	bool initE = false;
+	do
+	{
 		system("cls");
-		cout << "1. nhap gia tri cho mang \n"
-			<<"2. xuat cac gia tri dang luu trong mang\n"
-			<<"3. tinh tong so chan, tich so le\n"
-			<<"4. xoa phan tu\n"
-			<<"5. sap xep theo thu tu giam dan\n"
-			<<"0. thoat chuong trinh\n"
-			<< "chuong trinh muon thuc hien: ";
-		cin >> choice;
+		cout << "b. tinh tong S \n"
+			<< "c.tinh dien tich hinh tron \n"
+			<< "d.kiem tra snt \n"
+			<< "e.nhap 3 so nguyen, tim so lon nhat, so nho nhat \n"
+			<< "f.sap xep thu tu tang dan cua cau e \n"
+			<< "x.thoat ctrinh \n";
+		cin >> chon;
 
-		switch (choice) {
-			case 0: 
-			{
-				cout << "cam on!";
-				break;
-			}
-			case 1:
-			{
-				cout << "nhap so phan tu: ";
-				do {
-					cin >> n;
-					if (n <= max && n > 0) 
-					{
-						for (int i = 0; i < n; i++)
-						{
-							cin >> arr[i];
-						}
-						init = true;
-					}
-					else
-					{
-						cout << "so phan tu khong hop le, vui long nhap lai so phan tu:";
-					}
-					
-				} while (n > max || n <= 0);
-				break;
-			}
-			case 2:
-			{
-				if (init) 
-				{
-					cout << "mang dang luu tru la: ";
-					for (int i = 0; i < n; i++)
-					{
-						cout << arr[i] << " ";
-					}
-				}
-				else 
-				{
-					cout << "mang chua duoc khoi tao!";
-				}
-				break; 
-			}
-			case 3: 
-			{
-				if (init) {
-					int chan = 1, le = 0, demchan = 0, demle = 0;
-					for (int i = 0; i < n; i++)
-					{
-						if (arr[i] % 2 == 0)
-						{
-							chan *= arr[i];
-							demchan++;
-						}
-						else
-						{
-							le += arr[i];
-							demle++;
-						}
-					}
-					if (demchan == 0)
-					{
-						cout << "khong co so chan";
-					}
-					else
-					{
-						cout << "tich chan= " << chan;
-					}
-					if (demle == 0)
-					{
-						cout << "khong co so le";
-					}
-					else
-					{
-						cout << "tong le= " << le;
-					}
-				}
-				else {
-					cout << "mang chua duoc khoi tao!";
-				}
-				break;
-			}
-			case 4:
-			{
-				if (init) {
-					int vt;
-					do {
-						cout << "nhap vi tri can xoa (1 - " << n << ") (-1 de dung xoa): ";
-						cin >> vt;
-						if ((vt < 1 && vt != 1) || vt > n) {
-							cout << "vui long chon lai vi tri hop le: ";
-						}
-					} while ((vt < 1 && vt != -1) || vt > n);
-					if (vt == -1) {
-						cout << "dung xoa";
-					}
-					else {
-						cout << "da xoa!";
-						for (int i = vt - 1; i <= n - 1; i++) {
-							arr[i] = arr[i + 1];
-						}
-						n--;
-					}
+		switch (chon){
+		case 'x' : case 'X' : 
+		{
+			cout << "cam on da su dung ctrinh!";
+			break;
+		}
 
-				}
-				else {
-					cout << "mang chua duoc khoi tao!";
-				}
-			}
-			case 5:
+		case 'b' : case 'B':
+		{
+			cout << "chuc nang tinh tong s: \n ";
+			int n, sum = 0;
+			cout << "nhap n: ";
+			cin >> n;
+			for (int i = 0; i <= n; i++)
 			{
-				if (init) {
-					int temp;
-					for (int i = 0; i <n-1; i++) {
-						for (int j = i + 1; j < n; j++) {
-							if (arr[i] < arr[j]){
-								temp = arr[i];
-								arr[i] = arr[j];
-								arr[j] = temp;
-							}
-						}
-					}
-					cout << "da sap xep xong!";
-				}
-				else {
-					cout << "mang chua duoc khoi tao!";
+				sum += i;
+			}
+			cout << "tong la: " <<sum;
+			break;
+		}
+
+		case 'c': case 'C':
+		{
+			cout << "chuc nang tinh dien tich hinh tron: \n";
+			const double PI = 3.1416;
+			double s, r;
+			cout << "nhap ban kinh r: ";
+			cin >> r;
+			s = PI*r*r;
+			cout << "dien tich hinh tron la : " << fixed << setprecision(4)<<s;
+			break;
+		}
+		
+		case 'd' : case 'D':
+		{
+			cout << "chuc nang kiem tra snt \n ";
+			bool SNT = true;
+			cout << "nhap snt can kiem tra: ";
+			int n; cin >> n;
+			if (n < 2) {
+				SNT = false;
+			}
+			for (int i = 2; i <= n / 2; i++) {
+				if (n%i == 0)
+				{
+					SNT = false;
+					break;
 				}
 			}
-			default:
-				break;
-		} 
+			cout << n << " " << (SNT ? "la" : "khong la") << " SNT" << endl;
+			break;
+		}
+
+		case 'e' : case 'E':
+		{
+			cout << "chuong trinh tim so lon nhat cua 3 so \n";
+			cout << "nhap 3 so can so sanh : ";
+			cin >> a >> b >> c;
+			min = a;
+			if (min > b) {
+				min = b;
+			}
+			if (min > c) {
+				min = c;
+			}
+
+			max = a;
+			if (max < b) {
+				max = b;
+			}
+			if (max < c) {
+				max = c;
+			}
+
+			cout << "so nho nhat la: " << min << ", so lon nhat la: " << max;
+			initE = true;
+			break;
+		}
+
+		case 'f': case 'F':
+		{
+			if (initE) {
+				int sogiua = a + b + c - max - min;
+				cout << "tu lon den be: " << max << " " << sogiua << " " << min;
+				cout << "tu be den lon: " << min << " " << sogiua << " " << max;
+			}
+			else {
+				cout << "vui long lam cau e truoc";
+			}
+			break;
+		}
+		default:
+			cout << " vui long nhap lai : ";
+			break;
+		}
 		system("pause");
-	} while (choice!=0);
+	} while (chon != 'x' && chon!='X');
 
-	system("pause");
 	return 0;
 }
